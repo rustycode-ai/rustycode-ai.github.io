@@ -2,7 +2,7 @@
 $ErrorActionPreference = "Stop"
 
 $Repo = "rustycode-ai/rustycode"
-$Platform = "windows-x64"
+$Platform = "windows-x86_64"
 $Ext = "zip"
 $InstallDir = Join-Path $env:USERPROFILE ".local\bin"
 
