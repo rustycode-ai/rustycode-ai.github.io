@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RustyCode - AI-Powered Development Framework</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #f97316;
+    --accent-hover: #fb923c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  header { text-align: center; padding: 4rem 0 2rem; }
+  h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .tagline { font-size: 1.25rem; color: var(--muted); margin-bottom: 2rem; }
+
+  .install-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .install-box h2 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--muted); font-weight: 600; }
+  .install-cmd {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+  .install-cmd code { color: var(--accent); }
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { color: var(--text); border-color: var(--muted); }
+
+  .downloads { margin: 3rem 0; }
+  .downloads h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+  .download-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) { .download-grid { grid-template-columns: 1fr; } }
+  .download-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .download-card:hover { border-color: var(--accent); }
+  .download-card .platform { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .download-card .arch { color: var(--muted); font-size: 0.9rem; }
+  .download-card .badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(249,115,22,0.15);
+    color: var(--accent);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .features {
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .feature h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .feature p { color: var(--muted); font-size: 0.9rem; }
+
+  footer {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  #version { color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Rusty<span>Code</span></h1>
+    <p class="tagline">AI-powered autonomous development framework built in Rust</p>
+    <p id="version"></p>
+  </header>
+
+  <div class="install-box">
+    <h2>macOS / Linux</h2>
+    <div class="install-cmd">
+      <code>curl -fsSL https://rustycode-ai.github.io/install.sh | sh</code>
+      <button class="copy-btn" onclick="copyCmd(this)">Copy</button>
+    </div>
+  </div>
+
+  <div class="install-box">
+    <h2>Windows (PowerShell)</h2>
+    <div class="install-cmd">
+      <code>irm https://rustycode-ai.github.io/install.ps1 | iex</code>
+      <button class="copy-btn" onclick="copyCmd(this)">Copy</button>
+    </div>
+  </div>
+
+  <div class="downloads">
+    <h2>Download</h2>
+    <div class="download-grid">
+      <a class="download-card" id="dl-macos" href="#">
+        <div class="platform">macOS</div>
+        <div class="arch">Apple Silicon (arm64)</div>
+        <div class="badge">.tar.gz</div>
+      </a>
+      <a class="download-card" id="dl-windows" href="#">
+        <div class="platform">Windows</div>
+        <div class="arch">x86_64 (64-bit)</div>
+        <div class="badge">.zip</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <h3>Multi-Provider LLM</h3>
+      <p>Anthropic, OpenAI, Google, Ollama, and more through a unified interface.</p>
+    </div>
+    <div class="feature">
+      <h3>Autonomous Mode</h3>
+      <p>Structured reasoning, task planning, and multi-step execution strategies.</p>
+    </div>
+    <div class="feature">
+      <h3>Terminal UI</h3>
+      <p>Full ratatui-based TUI with session management, themes, and skill plugins.</p>
+    </div>
+    <div class="feature">
+      <h3>Tool Framework</h3>
+      <p>File editing, bash execution, web fetching, LSP integration, and MCP support.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://github.com/rustycode-ai">GitHub</a> &middot;
+    MIT License
+  </footer>
+</div>
+
+<script>
+async function init() {
+  try {
+    const resp = await fetch('https://api.github.com/repos/rustycode-ai/rustycode/releases/latest');
+    const release = await resp.json();
+    const tag = release.tag_name || 'latest';
+    document.getElementById('version').textContent = 'Latest: ' + tag;
+
+    for (const asset of release.assets) {
+      if (asset.name.includes('macos-arm64')) {
+        document.getElementById('dl-macos').href = asset.browser_download_url;
+      }
+      if (asset.name.includes('windows-x64')) {
+        document.getElementById('dl-windows').href = asset.browser_download_url;
+      }
+    }
+  } catch (e) {
+    document.getElementById('version').textContent = '';
+  }
+}
+
+function copyCmd(btn) {
+  const code = btn.previousElementSibling.textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
