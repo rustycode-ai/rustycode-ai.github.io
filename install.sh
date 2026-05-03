@@ -15,7 +15,7 @@ if [ "$OS" = "Darwin" ]; then
     EXT="tar.gz"
 elif [ "$OS" = "Linux" ]; then
     case "$ARCH" in
-        x86_64|amd64) PLATFORM="linux-x64"; EXT="tar.gz" ;;
+        x86_64|amd64) PLATFORM="linux-x86_64"; EXT="tar.gz" ;;
         aarch64|arm64) PLATFORM="linux-arm64"; EXT="tar.gz" ;;
         *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
     esac
