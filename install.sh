@@ -11,11 +11,14 @@ OS="$(uname -s)"
 ARCH="$(uname -m)"
 
 if [ "$OS" = "Darwin" ]; then
-    PLATFORM="macos-arm64"
-    EXT="tar.gz"
+    case "$ARCH" in
+        arm64) PLATFORM="macos-arm64"; EXT="tar.gz" ;;
+        x86_64) PLATFORM="macos-x64"; EXT="tar.gz" ;;
+        *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+    esac
 elif [ "$OS" = "Linux" ]; then
     case "$ARCH" in
-        x86_64|amd64) PLATFORM="linux-x86_64"; EXT="tar.gz" ;;
+        x86_64|amd64) PLATFORM="linux-x64"; EXT="tar.gz" ;;
         aarch64|arm64) PLATFORM="linux-arm64"; EXT="tar.gz" ;;
         *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
     esac
