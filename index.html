@@ -148,12 +148,27 @@
   <div class="downloads">
     <h2>Download</h2>
     <div class="download-grid">
-      <a class="download-card" id="dl-macos" href="#">
+      <a class="download-card" id="dl-macos-arm64" href="#">
         <div class="platform">macOS</div>
         <div class="arch">Apple Silicon (arm64)</div>
         <div class="badge">.tar.gz</div>
       </a>
-      <a class="download-card" id="dl-windows" href="#">
+      <a class="download-card" id="dl-macos-x64" href="#">
+        <div class="platform">macOS</div>
+        <div class="arch">Intel (x86_64)</div>
+        <div class="badge">.tar.gz</div>
+      </a>
+      <a class="download-card" id="dl-linux-x64" href="#">
+        <div class="platform">Linux</div>
+        <div class="arch">x86_64 (64-bit)</div>
+        <div class="badge">.tar.gz</div>
+      </a>
+      <a class="download-card" id="dl-linux-arm64" href="#">
+        <div class="platform">Linux</div>
+        <div class="arch">ARM64</div>
+        <div class="badge">.tar.gz</div>
+      </a>
+      <a class="download-card" id="dl-windows-x64" href="#">
         <div class="platform">Windows</div>
         <div class="arch">x86_64 (64-bit)</div>
         <div class="badge">.zip</div>
@@ -187,6 +202,14 @@
 </div>
 
 <script>
+const PLATFORMS = [
+  { id: 'dl-macos-arm64', pattern: 'macos-arm64' },
+  { id: 'dl-macos-x64', pattern: 'macos-x64' },
+  { id: 'dl-linux-x64', pattern: 'linux-x64' },
+  { id: 'dl-linux-arm64', pattern: 'linux-arm64' },
+  { id: 'dl-windows-x64', pattern: 'windows-x64' },
+];
+
 async function init() {
   try {
     const resp = await fetch('https://api.github.com/repos/rustycode-ai/rustycode/releases/latest');
@@ -195,11 +218,10 @@ async function init() {
     document.getElementById('version').textContent = 'Latest: ' + tag;
 
     for (const asset of release.assets) {
-      if (asset.name.includes('macos-arm64')) {
-        document.getElementById('dl-macos').href = asset.browser_download_url;
-      }
-      if (asset.name.includes('windows-x86_64')) {
-        document.getElementById('dl-windows').href = asset.browser_download_url;
+      for (const p of PLATFORMS) {
+        if (asset.name.includes(p.pattern)) {
+          document.getElementById(p.id).href = asset.browser_download_url;
+        }
       }
     }
   } catch (e) {
