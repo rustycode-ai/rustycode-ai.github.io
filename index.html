@@ -72,6 +72,7 @@
     font-family: 'SF Mono', 'Fira Code', monospace;
     font-size: 0.85rem;
     line-height: 1.7;
+    white-space: pre;
     overflow-x: auto;
     margin: 0.75rem 0;
   }
@@ -191,6 +192,24 @@
     <tr><td>rustycode update --check</td><td>Check for updates without installing</td></tr>
     <tr><td>rustycode bench</td><td>Run benchmarks (Terminal Bench 2.0 compatible)</td></tr>
   </table>
+
+  <h2>Configuration</h2>
+  <p>Create <code>~/.rustycode/config.toml</code> to set your default provider and model:</p>
+  <div class="code-block"><span class="comment"># ~/.rustycode/config.toml</span>
+[provider]
+default = "anthropic"
+
+[provider.anthropic]
+model = "claude-sonnet-4-20250514"
+
+[provider.openai]
+model = "gpt-4o"
+
+[provider.ollama]
+model = "codellama"
+base_url = "http://localhost:11434"</div>
+  <p>Set your API key via environment variable: <code>export ANTHROPIC_API_KEY=sk-...</code></p>
+  <p>Run <code>rustycode provider list</code> to see all configured providers.</p>
 
   <h2>LLM Providers</h2>
   <p>Unified interface across 12+ providers. Switch models without changing your workflow.</p>
