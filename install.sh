@@ -40,14 +40,12 @@ echo "Fetching latest ${CHANNEL} release..."
 if [ "$CHANNEL" = "stable" ]; then
     RELEASE_URL="https://api.github.com/repos/${REPO}/releases/latest"
 else
-    # For nightly, list releases and pick the first prerelease
     RELEASE_URL="https://api.github.com/repos/${REPO}/releases?per_page=10"
 fi
 
 RELEASE_JSON=$(curl -fsSL "$RELEASE_URL")
 
 if [ "$CHANNEL" = "nightly" ]; then
-    # Extract first prerelease from the list
     ASSET_URL=$(echo "$RELEASE_JSON" | python3 -c "
 import json, sys
 releases = json.load(sys.stdin)
@@ -60,7 +58,7 @@ for r in releases:
 sys.exit(1)
 " 2>/dev/null || echo "")
 else
-    ASSET_URL=$(echo "$RELEASE_JSON" | grep -o "\"browser_download_url\": \"[^\"]*${PLATFORM}[^\"]*\\.${EXT}\"" | head -1 | sed 's/.*: "\(.*\)"/\1/')
+    ASSET_URL=$(echo "$RELEASE_JSON" | grep -o "\"browser_download_url\": \"[^\"]*${PLATFORM}[^\"]*\.${EXT}\"" | head -1 | sed 's/.*: "\(.*\)"/\1/')
 fi
 
 if [ -z "$ASSET_URL" ]; then
@@ -85,7 +83,7 @@ else
 fi
 
 # Find the binary
-BINARY_PATH=$(find . -name "rustycode-cli" -o -name "rustycode" -type f -perm -u+x | head -1)
+BINARY_PATH=$(find . -name "rustycode" -type f -perm -u+x | head -1)
 
 if [ -z "$BINARY_PATH" ]; then
     echo "Error: Binary not found in archive."
