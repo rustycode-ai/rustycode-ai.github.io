@@ -8,11 +8,13 @@
   :root {
     --bg: #0d1117;
     --surface: #161b22;
+    --surface2: #1c2129;
     --border: #30363d;
     --text: #e6edf3;
     --muted: #8b949e;
     --accent: #f97316;
     --accent-hover: #fb923c;
+    --green: #3fb950;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -20,29 +22,34 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
-    min-height: 100vh;
   }
-  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
   header { text-align: center; padding: 4rem 0 2rem; }
   h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
   h1 span { color: var(--accent); }
-  .tagline { font-size: 1.25rem; color: var(--muted); margin-bottom: 2rem; }
+  .tagline { font-size: 1.25rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .stats { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .stats b { color: var(--text); }
+  #version { color: var(--muted); font-size: 0.85rem; }
+
+  h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  h3 { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
 
   .install-box {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.5rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
   }
-  .install-box h2 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--muted); font-weight: 600; }
+  .install-box h3 { margin: 0 0 0.75rem 0; color: var(--muted); font-weight: 600; font-size: 1rem; }
   .install-cmd {
     background: #010409;
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 0.75rem 1rem;
     font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,74 +58,81 @@
   }
   .install-cmd code { color: var(--accent); }
   .copy-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    white-space: nowrap;
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer;
+    font-size: 0.8rem; white-space: nowrap;
   }
   .copy-btn:hover { color: var(--text); border-color: var(--muted); }
 
-  .downloads { margin: 3rem 0; }
-  .downloads h2 { font-size: 1.5rem; margin-bottom: 1rem; }
-  .download-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  @media (max-width: 600px) { .download-grid { grid-template-columns: 1fr; } }
-  .download-card {
-    background: var(--surface);
+  .code-block {
+    background: #010409;
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-decoration: none;
-    color: var(--text);
-    transition: border-color 0.2s;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 0.75rem 0;
   }
-  .download-card:hover { border-color: var(--accent); }
-  .download-card .platform { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
-  .download-card .arch { color: var(--muted); font-size: 0.9rem; }
-  .download-card .badge {
-    display: inline-block;
-    margin-top: 0.75rem;
-    padding: 0.2rem 0.6rem;
-    background: rgba(249,115,22,0.15);
-    color: var(--accent);
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
+  .code-block .comment { color: #6a737d; }
+  .code-block .prompt { color: var(--green); }
 
-  .features {
-    margin: 3rem 0;
+  .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
-  @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
-  .feature {
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.25rem;
   }
-  .feature h3 { font-size: 1rem; margin-bottom: 0.5rem; }
-  .feature p { color: var(--muted); font-size: 0.9rem; }
+  .card h3 { margin: 0 0 0.5rem 0; font-size: 1rem; }
+  .card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+
+  .download-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .download-card:hover { border-color: var(--accent); }
+  .download-card .platform { font-weight: 700; font-size: 1.05rem; }
+  .download-card .arch { color: var(--muted); font-size: 0.85rem; }
+  .download-card .badge {
+    display: inline-block; margin-top: 0.5rem; padding: 0.15rem 0.5rem;
+    background: rgba(249,115,22,0.15); color: var(--accent);
+    border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+  }
+
+  .cmd-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; }
+  .cmd-table td { padding: 0.4rem 0.75rem; vertical-align: top; }
+  .cmd-table td:first-child {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.85rem; color: var(--accent); white-space: nowrap;
+  }
+  .cmd-table td:last-child { color: var(--muted); font-size: 0.9rem; }
+
+  .providers { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0; }
+  .provider-tag {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 0.25rem 0.6rem; font-size: 0.8rem; color: var(--muted);
+  }
 
   footer {
-    text-align: center;
-    padding: 3rem 0;
-    color: var(--muted);
-    font-size: 0.85rem;
+    text-align: center; padding: 3rem 0; color: var(--muted); font-size: 0.85rem;
   }
   footer a { color: var(--accent); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
-  #version { color: var(--muted); font-size: 0.85rem; }
+  p { margin: 0.5rem 0; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -126,77 +140,135 @@
   <header>
     <h1>Rusty<span>Code</span></h1>
     <p class="tagline">AI-powered autonomous development framework built in Rust</p>
+    <p class="stats"><b>48 crates</b> &middot; <b>1,100+ files</b> &middot; <b>525K LOC</b> &middot; <b>10,000+ tests</b></p>
     <p id="version"></p>
   </header>
 
-  <div class="install-box">
-    <h2>macOS / Linux</h2>
-    <div class="install-cmd">
-      <code>curl -fsSL https://rustycode-ai.github.io/install.sh | sh</code>
-      <button class="copy-btn" onclick="copyCmd(this)">Copy</button>
+  <h2>Install</h2>
+  <div class="grid2">
+    <div class="install-box">
+      <h3>macOS / Linux</h3>
+      <div class="install-cmd">
+        <code>curl -fsSL https://rustycode-ai.github.io/install.sh | sh</code>
+        <button class="copy-btn" onclick="copyCmd(this)">Copy</button>
+      </div>
+    </div>
+    <div class="install-box">
+      <h3>Windows (PowerShell)</h3>
+      <div class="install-cmd">
+        <code>irm https://rustycode-ai.github.io/install.ps1 | iex</code>
+        <button class="copy-btn" onclick="copyCmd(this)">Copy</button>
+      </div>
     </div>
   </div>
+  <p>Or <a href="#downloads" style="color:var(--accent)">download binaries</a> directly. Build from source with <code>cargo build --release</code>.</p>
 
-  <div class="install-box">
-    <h2>Windows (PowerShell)</h2>
-    <div class="install-cmd">
-      <code>irm https://rustycode-ai.github.io/install.ps1 | iex</code>
-      <button class="copy-btn" onclick="copyCmd(this)">Copy</button>
-    </div>
+  <h2>Quick Start</h2>
+  <div class="code-block">
+<span class="comment"># Launch interactive TUI</span>
+<span class="prompt">$</span> rustycode tui
+
+<span class="comment"># Run a one-shot task</span>
+<span class="prompt">$</span> rustycode "fix the authentication bug in src/auth.rs"
+
+<span class="comment"># Autonomous agent mode</span>
+<span class="prompt">$</span> rustycode agent new "implement user registration endpoint"
+
+<span class="comment"># Self-update to latest release</span>
+<span class="prompt">$</span> rustycode update
   </div>
 
-  <div class="downloads">
-    <h2>Download</h2>
-    <div class="download-grid">
-      <a class="download-card" id="dl-macos-arm64" href="#">
-        <div class="platform">macOS</div>
-        <div class="arch">Apple Silicon (arm64)</div>
-        <div class="badge">.tar.gz</div>
-      </a>
-      <a class="download-card" id="dl-macos-x64" href="#">
-        <div class="platform">macOS</div>
-        <div class="arch">Intel (x86_64)</div>
-        <div class="badge">.tar.gz</div>
-      </a>
-      <a class="download-card" id="dl-linux-x64" href="#">
-        <div class="platform">Linux</div>
-        <div class="arch">x86_64 (64-bit)</div>
-        <div class="badge">.tar.gz</div>
-      </a>
-      <a class="download-card" id="dl-linux-arm64" href="#">
-        <div class="platform">Linux</div>
-        <div class="arch">ARM64</div>
-        <div class="badge">.tar.gz</div>
-      </a>
-      <a class="download-card" id="dl-windows-x64" href="#">
-        <div class="platform">Windows</div>
-        <div class="arch">x86_64 (64-bit)</div>
-        <div class="badge">.zip</div>
-      </a>
-    </div>
+  <h2>Commands</h2>
+  <table class="cmd-table">
+    <tr><td>rustycode "task"</td><td>Run a single task with the default agent</td></tr>
+    <tr><td>rustycode tui</td><td>Launch interactive terminal UI with streaming &amp; themes</td></tr>
+    <tr><td>rustycode agent new "task"</td><td>Start an autonomous agent session</td></tr>
+    <tr><td>rustycode agent list</td><td>List agent sessions</td></tr>
+    <tr><td>rustycode provider list</td><td>Show configured LLM providers</td></tr>
+    <tr><td>rustycode skills list</td><td>List installed skill plugins</td></tr>
+    <tr><td>rustycode update</td><td>Self-update to latest stable release</td></tr>
+    <tr><td>rustycode update --nightly</td><td>Update to latest nightly build</td></tr>
+    <tr><td>rustycode update --check</td><td>Check for updates without installing</td></tr>
+    <tr><td>rustycode bench</td><td>Run benchmarks (Terminal Bench 2.0 compatible)</td></tr>
+  </table>
+
+  <h2>LLM Providers</h2>
+  <p>Unified interface across 12+ providers. Switch models without changing your workflow.</p>
+  <div class="providers">
+    <span class="provider-tag">Anthropic</span>
+    <span class="provider-tag">OpenAI</span>
+    <span class="provider-tag">Google Gemini</span>
+    <span class="provider-tag">AWS Bedrock</span>
+    <span class="provider-tag">Azure</span>
+    <span class="provider-tag">Ollama</span>
+    <span class="provider-tag">LiteRT</span>
+    <span class="provider-tag">Mistral</span>
+    <span class="provider-tag">Cohere</span>
+    <span class="provider-tag">HuggingFace</span>
+    <span class="provider-tag">OpenRouter</span>
+    <span class="provider-tag">GitHub Copilot</span>
   </div>
 
-  <div class="features">
-    <div class="feature">
-      <h3>Multi-Provider LLM</h3>
-      <p>Anthropic, OpenAI, Google, Ollama, and more through a unified interface.</p>
+  <h2>Features</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Autonomous Orchestration</h3>
+      <p>Structured reasoning, quality gates, plan milestones, and multi-step execution strategies.</p>
     </div>
-    <div class="feature">
-      <h3>Autonomous Mode</h3>
-      <p>Structured reasoning, task planning, and multi-step execution strategies.</p>
+    <div class="card">
+      <h3>20+ Built-in Tools</h3>
+      <p>File I/O, bash, grep, glob, LSP, web fetch, notebook editing, git operations, and MCP support.</p>
     </div>
-    <div class="feature">
+    <div class="card">
+      <h3>Skill System</h3>
+      <p>YAML frontmatter skills with path-based activation, brace expansion, and plugin architecture.</p>
+    </div>
+    <div class="card">
       <h3>Terminal UI</h3>
-      <p>Full ratatui-based TUI with session management, themes, and skill plugins.</p>
+      <p>Ratatui-based TUI with streaming output, session management, mouse support, and syntax highlighting.</p>
     </div>
-    <div class="feature">
-      <h3>Tool Framework</h3>
-      <p>File editing, bash execution, web fetching, LSP integration, and MCP support.</p>
+    <div class="card">
+      <h3>Sandboxing</h3>
+      <p>macOS Seatbelt and Linux landlock integration for OS-level command isolation.</p>
     </div>
+    <div class="card">
+      <h3>Team Orchestration</h3>
+      <p>Multi-agent coordination with task profiling, dependencies, and parallel execution.</p>
+    </div>
+  </div>
+
+  <h2 id="downloads">Download</h2>
+  <div class="grid2">
+    <a class="download-card" id="dl-macos-arm64" href="#">
+      <div class="platform">macOS</div>
+      <div class="arch">Apple Silicon (arm64)</div>
+      <div class="badge">.tar.gz</div>
+    </a>
+    <a class="download-card" id="dl-macos-x64" href="#">
+      <div class="platform">macOS</div>
+      <div class="arch">Intel (x86_64)</div>
+      <div class="badge">.tar.gz</div>
+    </a>
+    <a class="download-card" id="dl-linux-x64" href="#">
+      <div class="platform">Linux</div>
+      <div class="arch">x86_64 (64-bit)</div>
+      <div class="badge">.tar.gz</div>
+    </a>
+    <a class="download-card" id="dl-linux-arm64" href="#">
+      <div class="platform">Linux</div>
+      <div class="arch">ARM64</div>
+      <div class="badge">.tar.gz</div>
+    </a>
+    <a class="download-card" id="dl-windows-x64" href="#">
+      <div class="platform">Windows</div>
+      <div class="arch">x86_64 (64-bit)</div>
+      <div class="badge">.zip</div>
+    </a>
   </div>
 
   <footer>
-    <a href="https://github.com/rustycode-ai">GitHub</a> &middot;
+    <a href="https://github.com/rustycode-ai/rustycode">GitHub</a> &middot;
+    <a href="https://github.com/rustycode-ai/rustycode/releases">Releases</a> &middot;
     MIT License
   </footer>
 </div>
