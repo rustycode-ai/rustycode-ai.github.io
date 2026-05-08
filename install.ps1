@@ -4,7 +4,7 @@ $ErrorActionPreference = "Stop"
 $Repo = "rustycode-ai/rustycode"
 $Platform = "windows-x64"
 $Ext = "zip"
-$InstallDir = Join-Path $env:USERPROFILE ".local\bin"
+$InstallDir = Join-Path $env:USERPROFILE ".localin"
 
 Write-Host "RustyCode Installer" -ForegroundColor Cyan
 Write-Host "==================="
@@ -33,10 +33,7 @@ New-Item -Path $TmpDir -ItemType Directory | Out-Null
 Expand-Archive -Path $TmpFile -DestinationPath $TmpDir
 
 # Find binary
-$Binary = Get-ChildItem -Path $TmpDir -Recurse -Filter "rustycode-cli.exe" | Select-Object -First 1
-if (-not $Binary) {
-    $Binary = Get-ChildItem -Path $TmpDir -Reverise -Filter "rustycode.exe" | Select-Object -First 1
-}
+$Binary = Get-ChildItem -Path $TmpDir -Recurse -Filter "rustycode.exe" | Select-Object -First 1
 
 if (-not $Binary) {
     Write-Error "Binary not found in archive."
