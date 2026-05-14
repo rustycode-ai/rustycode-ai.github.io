@@ -194,20 +194,27 @@
   </table>
 
   <h2>Configuration</h2>
-  <p>Create <code>~/.rustycode/config.toml</code> to set your default provider and model:</p>
-  <div class="code-block"><span class="comment"># ~/.rustycode/config.toml</span>
-[provider]
-default = "anthropic"
-
-[provider.anthropic]
-model = "claude-sonnet-4-20250514"
-
-[provider.openai]
-model = "gpt-4o"
-
-[provider.ollama]
-model = "codellama"
-base_url = "http://localhost:11434"</div>
+  <p>Create <code>~/.rustycode/config.json</code> to set your default provider and model:</p>
+  <div class="code-block"><span class="comment">// ~/.rustycode/config.json</span>
+{
+  "provider": "anthropic",
+  "model": "claude-sonnet-4-20250514",
+  "max_tokens": 16384,
+  "providers": {
+    "anthropic": {
+      "api_key": "your-api-key-here",
+      "models": ["claude-sonnet-4-20250514", "claude-opus-4-20250514"]
+    },
+    "openai": {
+      "api_key": "your-api-key-here",
+      "models": ["gpt-4o"]
+    },
+    "ollama": {
+      "base_url": "http://localhost:11434",
+      "models": ["codellama"]
+    }
+  }
+}</div>
   <p>Set your API key via environment variable: <code>export ANTHROPIC_API_KEY=sk-...</code></p>
   <p>Run <code>rustycode provider list</code> to see all configured providers.</p>
 
